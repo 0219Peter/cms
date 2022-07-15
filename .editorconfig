@@ -1,0 +1,12 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space #缩进风格
+indent_size =2 #缩进大小
+end_of_line = lf
+trim_trailing_whitespace = true #去除行首任意空白字符
+
+[*.md] #仅md
+max_line_length = off
+trim_trailing_whitespace = false

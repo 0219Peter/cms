@@ -59,7 +59,7 @@ class CRequest {
     )
   }
 
-  request<T>(config: CRequestConfig): Promise<T> {
+  request<T = any>(config: CRequestConfig): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.showloading == false) {
         this.showLoading == config.showloading

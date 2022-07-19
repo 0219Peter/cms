@@ -4,7 +4,7 @@
       <span>Vue3+ts</span>
     </div>
 
-    <el-menu active-text-color="#FFFF00" background-color="#545c95" class="el-menu-vertical-demo" default-active="2"
+    <el-menu active-text-color="#FFFF00" background-color="#545c95" class="el-menu-vertical-demo" :default-active="defaultValue"
       :collapse="collapse">
 
       <template v-for="item in userMenus" :key="item.id">
@@ -17,7 +17,7 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subitem in item.children" :key="subitem.key">
-              <el-menu-item :index="subitem.id + ''" class="el-menu-item ">
+              <el-menu-item :index="subitem.id + ''" class="el-menu-item " @click="handleMenuItemClick(subitem)">
                 <i v-if="subitem.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
@@ -40,8 +40,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed ,ref} from 'vue';
 import { useStore } from '../../../store/index';
+import { useRouter ,useRoute } from 'vue-router';
+import {pathMapToMenu} from '../../../utils/map-menus'
+
 export default defineComponent({
   props: {
     collapse: {
@@ -51,12 +54,25 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const userMenus = computed(() => {
       return store.state.login.userMenus
 
     });
 
-    return { userMenus }
+    const route= useRoute()
+    const currentPath = route.path
+
+    const menu = pathMapToMenu(userMenus.value,currentPath)
+    console.log(menu)
+    const defaultValue = ref(menu.id + '')
+
+    const handleMenuItemClick = (item: any) => {
+      router.push({
+        path: item.url ?? 'not-found'
+      })
+    }
+    return { userMenus, handleMenuItemClick ,defaultValue}
   }
 
 })

@@ -1,6 +1,6 @@
 import myRequest from "../index"
-import { Iaccount, IDateType, ILoginResult } from "./type"
-
+import { Iaccount, ILoginResult } from "./type"
+import { IDateType } from "../type"
 export function accountLoginRequest(account: Iaccount) {
   return myRequest.post<IDateType<ILoginResult>>({
     url: "/login",

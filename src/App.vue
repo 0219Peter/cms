@@ -1,7 +1,10 @@
 
 <template>
   <keep-alive>
-    <router-view/>
+    <el-config-provider :locale="zhCn">
+        <router-view/>
+    </el-config-provider>
+
   </keep-alive>
 </template>
 

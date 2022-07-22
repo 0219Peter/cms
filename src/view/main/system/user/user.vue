@@ -1,13 +1,7 @@
 <template>
   <div class="user">
-    <page-search :formItems="formItems"></page-search>
-    <div class="content">
-      <mytable :data="userList" :propList="propList">
-        <template #status="scope">
-          <el-button>{{ scope.row.enable ? '启用' : '禁用' }} </el-button>
-        </template>
-      </mytable>
-    </div>
+    <page-search :formItems="formItems"  @resetBtnClick="handleResetClick" @queryBtnClick="handleQueryClick"></page-search>
+    <page-content ref="pageContentRef" :propList="propList" :title="title" :pageName="'users'"></page-content>
   </div>
 </template>
 
@@ -15,26 +9,19 @@
 import { defineComponent, ref, computed } from 'vue'
 import MyForm, { IFormItem } from '../../../../base-ui/form/index'
 import PageSearch from '../../../../components/page-search/index'
-import { useStore } from 'vuex'
-import Mytable from '../../../../base-ui/table/index'
+import PageContent from '../../../../components/page-content/src/page-content.vue'
+
+import { usePageSearch } from '../../../../hooks/use-page-search'
 
 export default defineComponent({
   components: {
     PageSearch,
-    Mytable
-  },
+    PageContent
+},
   name: 'user',
   setup() {
-    const store = useStore()
-    store.dispatch("system/getPageListAction", {
-      pageUrl: '/users/list',
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    })
-    const userList = computed(() => store.state.system.userList)
-    const userCount = computed(() => store.state.system.userCount)
+    const title = '用户列表'
+    const [pageContentRef,handleResetClick,handleQueryClick] = usePageSearch()
 
     const propList = [
       { prop: 'name', label: '用户名', minWidth: '100', slotname: 'name' },
@@ -43,6 +30,7 @@ export default defineComponent({
       { prop: 'enable', label: '状态', minWidth: '100', slotname: 'status' },
       { prop: 'createAt', label: '创建时间', minWidth: '100', slotname: 'createAt' },
       { prop: 'updateAt', label: '更新时间', minWidth: '100', slotname: 'updateAt' },
+      { label: '操作', minWidth: '120', slotname: 'handle' },
     ]
 
 
@@ -62,19 +50,25 @@ export default defineComponent({
         placeholder: '请输入用户名'
       },
       {
-        field: 'password',
-        type: 'password',
-        label: '密码',
-        placeholder: '请输入密码'
+        field: 'realname',
+        type: 'input',
+        label: '真实姓名',
+        placeholder: '请输入真实姓名'
       },
       {
-        field: 'sport',
+        field: 'cellphone',
+        type: 'input',
+        label: '电话号码',
+        placeholder: '请输入电话号码'
+      },
+      {
+        field: 'enable',
         type: 'select',
-        label: '喜欢的运动',
-        placeholder: '请选择喜欢的运动',
+        label: '用户状态',
+        placeholder: '请选择用户状态',
         options: [
-          { title: '篮球', value: 'basketball' },
-          { title: '足球', value: 'football' }
+          { title: '启用', value: 1 },
+          { title: '禁用', value: 0 }
         ]
       },
       {
@@ -89,10 +83,15 @@ export default defineComponent({
         }
       },
     ]
+
+
     return {
+      handleResetClick,
+      handleQueryClick,
+      pageContentRef,
       formItems,
       propList,
-      userList
+      title
     }
   }
 })

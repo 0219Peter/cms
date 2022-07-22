@@ -1,18 +1,78 @@
 <template>
-  <div class="role">
-    <h2>role</h2>
+  <div class="user">
+    <page-search :formItems="formItems" ></page-search>
+    <page-content :propList="propList" :title="title" :pageName="'role'"></page-content>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
+import MyForm, { IFormItem } from '../../../../base-ui/form/index'
+import PageSearch from '../../../../components/page-search/index'
+import { useStore } from 'vuex'
+import PageContent from '../../../../components/page-content/src/page-content.vue'
 
 export default defineComponent({
-  name: 'role',
+  components: {
+    PageSearch,
+    PageContent
+},
+  name: 'user',
   setup() {
-    return {}
+    const title = '权限控制'
+
+
+
+    const propList = [
+      { prop: 'name', label: '用户名', minWidth: '100', slotname: 'name' },
+      { prop: 'role', label: '权限控制', minWidth: '100', slotname: 'role' },
+      { prop: 'createAt', label: '创建时间', minWidth: '100', slotname: 'createAt' },
+      { prop: 'updateAt', label: '更新时间', minWidth: '100', slotname: 'updateAt' },
+      { label: '操作', minWidth: '120', slotname: 'handle' },
+    ]
+
+
+
+
+    const formItems: IFormItem[] = [
+      {
+        field: 'id',
+        type: 'input',
+        label: '角色名称',
+        placeholder: '请输入角色'
+      },
+      {
+        field: 'name',
+        type: 'input',
+        label: '权限介绍',
+        placeholder: '请输入'
+      },
+      {
+        field: 'createTime',
+        type: 'datepicker',
+        label: '创建时间',
+        placeholder: '请选择创建时间',
+        otherOption: {
+          startPlaceholder: '开始时间',
+          endPlaceholder: '结束时间',
+          type: 'daterange'
+        }
+      },
+    ]
+
+
+    return {
+      formItems,
+      propList,
+      title
+    }
   }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.handle-btns {
+  text-align: right;
+  padding: 0 50px 20px 0;
+}
+</style>

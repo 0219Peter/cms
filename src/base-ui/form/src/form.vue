@@ -61,6 +61,13 @@ export default defineComponent({
   emits:['update:modelValue'],
   setup(props,{emit}) {
     const formData = ref({...props.modelValue})
+    // watch(
+    //   () => props.modelValue,
+    //   (newValue) => {
+    //     formData.value = {...props.modelValue}
+    //   }
+    // )
+
     watch(formData,(newValue) => emit('update:modelValue',newValue),{
       deep:true  //深监听
     })

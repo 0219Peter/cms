@@ -6,15 +6,15 @@
       </template>
       <template #footer>
         <div class="handle-btns">
-          <el-button type="primary">重置</el-button>
-          <el-button type="primary">搜索</el-button>
+          <el-button type="primary" @click="handleResetClick">重置</el-button>
+          <el-button type="primary" @click="handleSearchClick">搜索</el-button>
         </div>
       </template>
     </my-form>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 import MyForm from '../../../base-ui/form/index'
 
@@ -23,6 +23,10 @@ export default defineComponent({
     formItems: {
       type: Object,
       required: true
+    },
+    formData:{
+      type: Object,
+      require:true
     }
   },
   components: {
@@ -30,16 +34,33 @@ export default defineComponent({
 
   },
   name: 'user',
-  setup() {
-    const formData = ref({
-      id: '',
-      name: '',
-      password: '',
-      sport: '',
-      createTime: '',
-    })
+  emits:['resetBtnClick','queryBtnClick'],
+  setup(props,{emit}) {
+
+     //双向绑定的属性
+     const formItems = props.formItems  ?? []
+     const formOriginData: any={}
+    for(const item of formItems){
+      formOriginData[item.field] = ''
+    }
+    const formData = ref(formOriginData)
+
+    //重置操作
+    const handleResetClick = () => {
+        // formData.value = formOriginData
+       for(const key in formOriginData)
+        formData.value[`${key}`] = formOriginData[key]
+        emit('resetBtnClick')
+    }
+    //搜索功能
+    const handleSearchClick = () => {
+      emit('queryBtnClick',formData.value)
+    }
+
     return {
-      formData
+      formData,
+      handleResetClick,
+      handleSearchClick
     }
   }
 })

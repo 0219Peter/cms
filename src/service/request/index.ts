@@ -88,6 +88,12 @@ class CRequest {
   get<T>(config: CRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "Get" })
   }
+  delete<T>(config: CRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: "delete" })
+  }
+  patch<T>(config: CRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: "patch" })
+  }
 }
 
 export default CRequest

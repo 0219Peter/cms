@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <my-form :formItems="formItems" v-model="formData">
+    <my-form :formItems="formItems" v-model="formData" v-bind="SearchConfig">
       <template #header>
         <h1>高级检索</h1>
       </template>
@@ -37,6 +37,10 @@ export default defineComponent({
   emits:['resetBtnClick','queryBtnClick'],
   setup(props,{emit}) {
 
+    const SearchConfig ={
+      collLayout: { span: 8 }
+    }
+
      //双向绑定的属性
      const formItems = props.formItems  ?? []
      const formOriginData: any={}
@@ -60,7 +64,8 @@ export default defineComponent({
     return {
       formData,
       handleResetClick,
-      handleSearchClick
+      handleSearchClick,
+      SearchConfig
     }
   }
 })

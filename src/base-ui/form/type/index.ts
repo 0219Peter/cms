@@ -8,4 +8,9 @@ export interface IFormItem {
   placeholder?: any
   options?: any
   otherOption?: any
+  isHidden?: boolean
+}
+export interface IForm {
+  formItems: IFormItem[]
+  collLayout?: Object
 }

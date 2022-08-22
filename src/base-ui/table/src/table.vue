@@ -7,9 +7,9 @@
       </div>
     </slot>
   </div>
-  <el-table :data="dataList" style="width: 100%" border>
+  <el-table :data="dataList" style="width: 100%" border row-key="" v-bind="childrenProps ">
     <template v-for="propItem in propList" :key="propItem.prop">
-      <el-table-column v-bind="propItem" align="center">
+      <el-table-column v-bind="propItem" align="center" show-overflow-tooltip>
         <template #default="scope">
           <slot :name="propItem.slotname" :row="scope.row">
             {{ scope.row[propItem.prop] }}
@@ -55,6 +55,11 @@ export default defineComponent({
       default: () => ({
         currentPage: 0,
         currentSize: 10
+      })
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({
       })
     }
   },

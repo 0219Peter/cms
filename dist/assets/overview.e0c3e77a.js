@@ -1,0 +1,1 @@
+import{_ as e,d as o,o as s,c as t,b as r}from"./index.b9085ce3.js";const n=o({name:"overview",setup(){return{}}}),a={class:"overview"},c=r("h2",null,"overview",-1),_=[c];function i(d,p,v,f,l,u){return s(),t("div",a,_)}var h=e(n,[["render",i]]);export{h as default};

@@ -1,0 +1,1 @@
+import{_ as e,d as t,o as n,c as s,b as o}from"./index.b9085ce3.js";const a=t({name:"department",setup(){return{}}}),r={class:"department"},c=o("h2",null,"department",-1),d=[c];function _(p,m,i,f,l,u){return n(),s("div",r,d)}var $=e(a,[["render",_]]);export{$ as default};

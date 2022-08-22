@@ -1,0 +1,1 @@
+import{_ as e,d as t,o as s,c as o,b as a}from"./index.b9085ce3.js";const c=t({name:"chat",setup(){return{}}}),n={class:"chat"},r=a("h2",null,"chat",-1),_=[r];function d(p,h,i,f,l,u){return s(),o("div",n,_)}var $=e(c,[["render",d]]);export{$ as default};

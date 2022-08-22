@@ -1953,10 +1953,10 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-typescript@^4.9.0-dev.20220822:
-  version "4.9.0-dev.20220822"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.9.0-dev.20220822.tgz#d6a5557e11ed87cdc844fb457e32a44980925e44"
-  integrity sha512-AOwv5P9FEACID+BXIvdWuP/ZroTJ0YaB6Cl3vP865CP2PC8E3HXuqZwNtbY0ikfCzgSiArprv+rnAAH+6Gkpxw==
+typescript@4.5.4:
+  version "4.5.4"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
+  integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
 
 unbzip2-stream@^1.0.9:
   version "1.4.3"
